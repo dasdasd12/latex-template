@@ -5,41 +5,45 @@
 \contentsline {section}{\numberline {2}模块接口说明}{4}{section.2}%
 \contentsline {section}{\numberline {3}系统架构分析}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}电路架构}{5}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}模块一：电压基准}{6}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}模块二：误差放大器}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.2}模块一：电压基准}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}模块二：误差放大器}{9}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}第一级放大器分析}{10}{subsubsection.3.3.1}%
-\contentsline {paragraph}{1a. 折叠轨到轨差分输入级}{10}{figure.caption.8}%
-\contentsline {paragraph}{折叠共源共栅的高速特性}{11}{equation.15}%
-\contentsline {paragraph}{1b. 共源级放大器}{11}{equation.16}%
-\contentsline {paragraph}{第一级总增益}{11}{equation.17}%
+\contentsline {paragraph}{1a. 折叠轨到轨差分输入级}{10}{figure.caption.9}%
+\contentsline {paragraph}{折叠共源共栅的高速特性}{11}{equation.18}%
+\contentsline {paragraph}{1b. 共源级放大器}{11}{equation.19}%
+\contentsline {paragraph}{第一级总增益}{12}{equation.20}%
 \contentsline {subsubsection}{\numberline {3.3.2}第三级：单位增益缓冲级}{12}{subsubsection.3.3.2}%
-\contentsline {paragraph}{结构与功能}{12}{figure.caption.9}%
-\contentsline {paragraph}{缓冲级的作用}{13}{equation.19}%
+\contentsline {paragraph}{结构与功能}{13}{figure.caption.10}%
+\contentsline {paragraph}{缓冲级的作用}{13}{equation.22}%
 \contentsline {paragraph}{总增益}{13}{Item.4}%
-\contentsline {paragraph}{频率补偿}{13}{equation.20}%
+\contentsline {paragraph}{频率补偿}{13}{equation.23}%
 \contentsline {subsection}{\numberline {3.4}模块三：限流模块}{14}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}模块四：过温保护模块}{16}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}PSRR性能分析}{17}{subsection.3.6}%
-\contentsline {paragraph}{1\,kHz频率下的PSRR分析}{18}{figure.caption.12}%
-\contentsline {paragraph}{各级PSR贡献分析}{18}{figure.caption.12}%
-\contentsline {paragraph}{PSRR设计余量}{18}{figure.caption.12}%
+\contentsline {subsection}{\numberline {3.6}模块五：系统使能控制模块}{17}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}PSRR性能分析}{17}{subsection.3.7}%
+\contentsline {paragraph}{1\,kHz频率下的PSRR分析}{18}{figure.caption.14}%
+\contentsline {paragraph}{各级PSR贡献分析}{18}{figure.caption.14}%
+\contentsline {paragraph}{PSRR设计余量}{19}{figure.caption.14}%
 \contentsline {section}{\numberline {4}仿真结果}{19}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Bandgap模块}{19}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}主环路仿真结果}{23}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}过温保护模块}{27}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}过流保护模块}{28}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}系统整体仿真结果}{29}{subsection.4.5}%
-\contentsline {subsubsection}{\numberline {4.5.1}电压电流输出能力}{29}{subsubsection.4.5.1}%
-\contentsline {subsubsection}{\numberline {4.5.2}电压输出精度}{31}{subsubsection.4.5.2}%
-\contentsline {subsubsection}{\numberline {4.5.3}系统PSRR}{34}{subsubsection.4.5.3}%
-\contentsline {subsubsection}{\numberline {4.5.4}系统静态电流与功耗}{38}{subsubsection.4.5.4}%
-\contentsline {subsubsection}{\numberline {4.5.5}系统保护功能}{41}{subsubsection.4.5.5}%
+\contentsline {subsection}{\numberline {4.4}过流保护模块}{27}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}使能控制模块}{28}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}系统整体仿真结果}{29}{subsection.4.6}%
+\contentsline {subsubsection}{\numberline {4.6.1}电压电流输出能力}{29}{subsubsection.4.6.1}%
+\contentsline {subsubsection}{\numberline {4.6.2}电压输出精度}{31}{subsubsection.4.6.2}%
+\contentsline {subsubsection}{\numberline {4.6.3}系统PSRR}{34}{subsubsection.4.6.3}%
+\contentsline {subsubsection}{\numberline {4.6.4}系统静态电流与功耗}{38}{subsubsection.4.6.4}%
+\contentsline {subsubsection}{\numberline {4.6.5}系统保护功能}{41}{subsubsection.4.6.5}%
 \contentsline {section}{\numberline {5}版图设计}{44}{section.5}%
 \contentsline {subsection}{\numberline {5.1}版图规划}{44}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}DRC/LVS验证}{44}{subsection.5.2}%
 \contentsline {subsection}{\numberline {5.3}后仿验证}{44}{subsection.5.3}%
 \contentsline {section}{\numberline {6}项目总结}{44}{section.6}%
 \contentsline {subsection}{\numberline {6.1}已完成工作}{44}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}优势与后续提升方向}{45}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}后续工作}{45}{subsection.6.3}%
-\contentsline {section}{参考文献}{46}{Item.13}%
+\contentsline {subsection}{\numberline {6.2}关键指标总结与版图补充口径}{45}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}版图结果补充模板}{46}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}优势与后续提升方向}{47}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}后续工作}{47}{subsection.6.5}%
+\contentsline {section}{参考文献}{48}{Item.13}%
