@@ -8,12 +8,20 @@
 % ============================================================
 % 中文支持（用 fontspec + xeCJK 替代 ctexart）
 % ============================================================
+\usepackage{iftex}
 \usepackage{fontspec}
-\usepackage{xeCJK}
-% 自动检测系统中文字体（STSong 没有粗体，用假粗体）
-\setCJKmainfont[BoldFont={STSong},BoldFeatures={FakeBold=2},ItalicFont={STFangsong}]{STSong}
-\setCJKsansfont{STHeiti}
-\setCJKmonofont{STFangsong}
+\ifLuaTeX
+  \usepackage{luatexja-fontspec}
+  \setmainjfont{STSong}
+  \setsansjfont{SimHei}
+  \setmonojfont{STFangsong}
+\else
+  \usepackage{xeCJK}
+  % 自动检测系统中文字体（STSong 没有粗体，用假粗体）
+  \setCJKmainfont[BoldFont={STSong},BoldFeatures={FakeBold=2},ItalicFont={STFangsong}]{STSong}
+  \setCJKsansfont{STHeiti}
+  \setCJKmonofont{STFangsong}
+\fi
 
 % ============================================================
 % 宏包导入
@@ -206,7 +214,7 @@
     7 & 过温保护 & 支持升温关断与降温恢复 & 具备过热保护 \\
     8 & 输出限流保护 & 限流点约1.1--1.4\,A & 具备输出限流保护 \\
     9 & 工作温度 & -40--125\,℃完成验证 & -40--125\,℃ \\
-    10 & 工艺与版图验证 & TSMC 40\,nm；已给出版图规划与验证流程 & 工艺$\geq$40\,nm，需DRC/LVS \\
+    10 & 工艺与版图验证 & TSMC 40\,nm；已补充部分模块版图及验证截图 & 工艺$\geq$40\,nm，需DRC/LVS \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -1492,38 +1500,154 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 % ==================
 \section{版图设计}
 
-\subsection{版图规划}
+\subsection{模块版图}
 
-本阶段报告完成了电路结构设计、关键模块前仿和系统级性能验证，并给出整体版图规划方案。后续版图设计中，Bandgap核心器件和反馈电阻网络采用共心、交叉和虚拟单元等匹配版图策略；误差放大器输入差分对、电流镜和偏置支路采用对称走线与等环境布局；功率管区域兼顾大电流能力、金属电迁移裕量和衬底噪声隔离。保护电路和数字控制端口布置在靠近接口的位置，便于信号引出和系统级连线。
+目前已补充误差放大器、限流保护、过温保护和数字控制模块版图。各模块版图如下。
 
-% 示例：插入版图
-% \begin{figure}[H]
-%   \centering
-%   \includegraphics[width=0.7\textwidth]{fig/layout.pdf}
-%   \caption{芯片整体版图}
-%   \label{fig:layout}
-% \end{figure}
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Error_Amplifier_layout.png}
+    \caption{误差放大器}
+    \label{fig:layout-ea}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/current_limit_layout.png}
+    \caption{限流保护}
+    \label{fig:layout-current-limit}
+  \end{subfigure}
 
-\subsection{DRC/LVS验证}
+  \vspace{0.5em}
 
-版图完成后将基于TSMC 40\,nm工艺设计规则进行DRC检查，并通过LVS验证版图网表与原理图网表的一致性。本文已明确版图验证流程，后续在整体版图完成后补充DRC/LVS截图和验证结果，形成完整的版图交付闭环。
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Thermal_Shutdown_layout.png}
+    \caption{过温保护}
+    \label{fig:layout-thermal-shutdown}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Digital_layout.png}
+    \caption{数字控制}
+    \label{fig:layout-digital}
+  \end{subfigure}
+  \caption{已完成模块版图}
+  \label{fig:layout-modules}
+\end{figure}
 
-% \begin{figure}[H]
-%   \centering
-%   \begin{subfigure}[b]{0.48\textwidth}
-%     \centering
-%     \includegraphics[width=\textwidth]{fig/drc.pdf}
-%     \caption{DRC结果}
-%   \end{subfigure}
-%   \hfill
-%   \begin{subfigure}[b]{0.48\textwidth}
-%     \centering
-%     \includegraphics[width=\textwidth]{fig/lvs.pdf}
-%     \caption{LVS结果}
-%   \end{subfigure}
-%   \caption{设计规则验证}
-%   \label{fig:drc-lvs}
-% \end{figure}
+\subsection{物理验证}
+
+已补充现有模块的DRC、LVS和ERC验证截图。
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Error_Amplifier_DRC.png}
+    \caption{DRC}
+    \label{fig:layout-ea-drc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Error_Amplifier_LVS.png}
+    \caption{LVS}
+    \label{fig:layout-ea-lvs}
+  \end{subfigure}
+
+  \vspace{0.5em}
+
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Error_Amplifier_ERC.png}
+    \caption{ERC}
+    \label{fig:layout-ea-erc}
+  \end{subfigure}
+  \caption{误差放大器模块物理验证结果}
+  \label{fig:layout-ea-check}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/current_limit_DRC.png}
+    \caption{DRC}
+    \label{fig:layout-current-limit-drc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/current_limit_LVS.png}
+    \caption{LVS}
+    \label{fig:layout-current-limit-lvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/current_limit_ERC.png}
+    \caption{ERC}
+    \label{fig:layout-current-limit-erc}
+  \end{subfigure}
+  \caption{限流保护模块物理验证结果}
+  \label{fig:layout-current-limit-check}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Thermal_Shutdown_DRC.png}
+    \caption{DRC}
+    \label{fig:layout-thermal-shutdown-drc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Thermal_Shutdown_LVS.png}
+    \caption{LVS}
+    \label{fig:layout-thermal-shutdown-lvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Thermal_Shutdown_ERC.png}
+    \caption{ERC}
+    \label{fig:layout-thermal-shutdown-erc}
+  \end{subfigure}
+  \caption{过温保护模块物理验证结果}
+  \label{fig:layout-thermal-shutdown-check}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Digital_DRC.png}
+    \caption{DRC}
+    \label{fig:layout-digital-drc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Digital_LVS.png}
+    \caption{LVS}
+    \label{fig:layout-digital-lvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Digital_ERC.png}
+    \caption{ERC}
+    \label{fig:layout-digital-erc}
+  \end{subfigure}
+  \caption{数字控制模块物理验证结果}
+  \label{fig:layout-digital-check}
+\end{figure}
 
 \subsection{后仿验证}
 
@@ -1541,100 +1665,13 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
   \item 完成了LDO主环路的系统级前仿，验证了输出电压范围、输出电压精度、静态电流和负载能力。
   \item 完成了1\,kHz系统PSR扫描和主环路相位裕度全PVT扫描，覆盖低压、高温和重载等严苛工况；PSR最高达到100.90\,dB，150/324个扫描点达到80\,dB以上。
   \item 完成了过流保护和过温保护功能验证，证明系统在过载和高温条件下具有可靠保护能力。
+  \item 补充了误差放大器、限流保护、过温保护和数字控制模块的版图及物理验证截图。
   \item 完成了关键指标与题目要求的对照分析，前仿结果满足输出精度、输出电流、静态电流和工作温度范围等基本指标。
 \end{enumerate}
 
-\subsection{关键指标总结与版图补充口径}
+\subsection{版图与验证补充}
 
-为便于后续将版图、DRC/LVS和寄生后仿结果补入报告，本文将主要前仿指标、题目判据和版图后需要补充的内容统一整理如表~\ref{tab:final-metric-layout-summary}所示。后续填写时建议同时给出“后仿数值”和“相对前仿变化量”，若指标变化明显，可从功率管栅极寄生电容、反馈网络寄生电阻电容、大电流金属压降和衬底/电源耦合路径等角度解释原因。
-\begin{table}[H]
-  \centering
-  \caption{项目关键指标总结及版图后仿补充项}
-  \label{tab:final-metric-layout-summary}
-  \scriptsize
-  \setlength{\tabcolsep}{3pt}
-  \renewcommand{\arraystretch}{1.25}
-  \begin{tabularx}{\textwidth}{p{2.0cm}p{3.0cm}p{2.2cm}XX}
-    \toprule
-    指标项目 & 前仿结果 & 题目/设计判据 & 版图后待补充内容 & 建议总结口径 \\
-    \midrule
-    工艺与工作范围 & TSMC 40\,nm；$V_{IN}$=3.135--3.465\,V；温度-40--125\,℃ & 工艺$\geq$40\,nm；3.3\,V供电；-40--125\,℃工作 & 芯片总尺寸、核心面积、端口位置、关键电源/地线走向 & 说明版图基于40\,nm设计规则完成，整体布局覆盖基准、主环路、功率级和保护模块。 \\
-    Bandgap基准 & 温漂11.47--24.81\,ppm/$^\circ$C；内部放大器最小相位裕度61.12$^\circ$；最大静态电流8.683\,$\mu$A & 为主环路提供稳定参考电压 & 填写版图后$V_{REF}$范围、温漂系数、静态电流和启动结果 & 若后仿温漂略增，可结合匹配电阻寄生和BJT周围环境差异说明。 \\
-    输出电压范围 & 1.4--2.4\,V可调，覆盖1.8\,V典型点 & 输出1.8\,V，支持设定输出 & 填写后仿可调范围、最差输出点和对应PVT条件 & 强调反馈网络和误差放大器在寄生条件下仍能维持闭环调节能力。 \\
-    输出电压精度 & 1.4\,V/1.8\,V/2.4\,V最差误差分别为0.4488\%、0.4490\%、0.4586\% & $\leq 2\%$ & 填写后仿最大误差、前后仿偏移量和最差角落 & 重点写“误差仍小于2\%”及相对前仿的变化原因。 \\
-    输出电流能力 & 900\,mA负载下覆盖1.4--2.4\,V；固定负载压力测试最大约1.145\,A & 基本$\geq$500\,mA；进阶$\geq$600\,mA & 填写后仿900\,mA输出保持情况、金属IR drop和功率管区域电流密度检查 & 说明功率管阵列和大电流金属互连为重载输出提供裕量。 \\
-    主环路稳定性 & 1.4\,V和1.8\,V输出下相位裕度均大于90$^\circ$；2.4\,V有效扫描点最低60.20$^\circ$ & 闭环稳定，通常需保留足够相位裕度 & 填写PEX后最小相位裕度、交越频率和最差负载点 & 若相位裕度下降，说明主要受补偿节点、电源线和功率管栅极寄生影响。 \\
-    1\,kHz PSR & 全扫描范围63.36--100.90\,dB；150/324个扫描点达到80\,dB以上 & 目标1\,kHz下$\geq$80\,dB & 填写后仿PSR范围、达到80\,dB以上点数和最差角落 & 重点对比版图寄生对电源耦合路径和低频环路增益的影响。 \\
-    静态电流 & 系统最坏静态电流约23.40\,$\mu$A & 基本$\leq$80\,$\mu$A；进阶$\leq$60\,$\mu$A & 填写后仿最大$I_Q$及对应输出电压、负载、工艺、电源和温度条件 & 突出低功耗裕量，并说明后仿电流是否仍低于35\,$\mu$A进阶满分点。 \\
-    保护功能 & 限流点约1.1--1.4\,A；过温关断约150\,℃；恢复约60\,℃ & 具备输出限流和过热保护 & 填写版图后限流点、温度翻转点、滞回宽度和保护动作波形 & 说明保护阈值在寄生后仍高于正常工作电流，并能覆盖过载/过温场景。 \\
-    物理验证 & 已给出版图规划和验证流程 & 需完成物理验证 & 填写DRC错误数、LVS匹配结果、PEX网表规模和后仿版本 & 建议写明“DRC clean、LVS matched”，并附上验证截图作为交付依据。 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-\subsection{版图结果补充模板}
-
-版图结果建议按照“整体版图--关键模块--大电流路径--验证截图--后仿对比”的顺序展示。整体版图用于说明面积、端口和模块分区；关键模块版图用于说明匹配策略；功率级版图用于说明大电流金属和过孔阵列；DRC/LVS截图用于证明物理验证闭环；后仿对比表用于将版图结果落到最终指标。
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}{0.48\textwidth}
-    \centering
-    \fbox{\parbox[c][3.0cm][c]{0.90\linewidth}{\centering 后续替换为芯片整体版图}}
-    \caption{整体版图与模块分区}
-    \label{fig:layout-template-top}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.48\textwidth}
-    \centering
-    \fbox{\parbox[c][3.0cm][c]{0.90\linewidth}{\centering 后续替换为关键模拟模块局部版图}}
-    \caption{Bandgap、误差放大器与反馈网络}
-    \label{fig:layout-template-analog}
-  \end{subfigure}
-
-  \vspace{0.5em}
-
-  \begin{subfigure}{0.48\textwidth}
-    \centering
-    \fbox{\parbox[c][3.0cm][c]{0.90\linewidth}{\centering 后续替换为功率管阵列和大电流互连}}
-    \caption{功率PMOS阵列与大电流金属}
-    \label{fig:layout-template-power}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.48\textwidth}
-    \centering
-    \fbox{\parbox[c][3.0cm][c]{0.90\linewidth}{\centering 后续替换为DRC/LVS验证截图}}
-    \caption{DRC/LVS验证结果}
-    \label{fig:layout-template-drc-lvs}
-  \end{subfigure}
-  \caption{版图结果与验证截图补充模板}
-  \label{fig:layout-result-template}
-\end{figure}
-\begin{table}[H]
-  \centering
-  \caption{建议补充的版图图题、子标题和正文要点}
-  \label{tab:layout-caption-plan}
-  \small
-  \setlength{\tabcolsep}{4pt}
-  \renewcommand{\arraystretch}{1.2}
-  \begin{tabularx}{\textwidth}{p{2.6cm}p{4.0cm}X}
-    \toprule
-    图表位置 & 建议标题/子标题 & 建议填写内容 \\
-    \midrule
-    整体版图 & 芯片整体版图与模块分区 & 标注总面积、核心面积、输入/输出/地/反馈/使能/热保护端口位置，以及Bandgap、EA、功率管、反馈网络、保护电路等模块的相对位置。 \\
-    关键模拟模块 & Bandgap、误差放大器与反馈网络局部版图 & 写明共心、交叉、虚拟单元、对称走线和等环境布局策略；说明敏感节点与数字/大电流区域的隔离方式。 \\
-    功率级区域 & PMOS功率管阵列与大电流互连版图 & 写明功率管阵列排布、源漏金属汇流、顶层金属宽度、多排过孔、地线回流路径和电迁移裕量检查结果。 \\
-    物理验证 & DRC和LVS验证结果 & 填写DRC是否clean、剩余warning是否可接受、LVS是否matched、器件数/网络数是否一致，并插入验证窗口截图。 \\
-    寄生后仿 & 版图寄生提取后关键指标对比 & 对比输出精度、静态电流、PSR、相位裕度、限流点和过温阈值；列出最差PVT角落与前后仿变化量。 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-后续可将以下文字作为版图结果段落的基础模板，并把空白处替换为实际版图和验证数据：
-
-\begin{quote}
-\small
-本设计基于TSMC 40\,nm CMOS工艺完成LDO整体版图，芯片整体尺寸为\underline{\hspace{1.6cm}}\,$\mu$m $\times$ \underline{\hspace{1.6cm}}\,$\mu$m，核心面积约为\underline{\hspace{1.6cm}}\,mm$^2$。版图按照模拟小信号区、反馈网络、保护控制区和功率级区域进行分区，Bandgap与反馈电阻网络采用匹配优先的布局方式，误差放大器输入级与电流镜采用对称布置，功率PMOS靠近输出端并使用宽金属和多排过孔降低大电流路径上的压降。
-
-物理验证方面，版图DRC检查结果为\underline{\hspace{1.6cm}}，LVS验证结果为\underline{\hspace{1.6cm}}。完成寄生参数提取后，系统在后仿下的最大输出电压误差为\underline{\hspace{1.6cm}}\%，最大静态电流为\underline{\hspace{1.6cm}}\,$\mu$A，1\,kHz最差PSR为\underline{\hspace{1.6cm}}\,dB，主环路最小相位裕度为\underline{\hspace{1.6cm}}$^\circ$。与前仿相比，主要变化来自\underline{\hspace{2.2cm}}，但整体指标仍满足题目要求。
-\end{quote}
+本次已将现有版图和验证截图补入第5章，覆盖误差放大器、限流保护、过温保护和数字控制模块。后续继续补齐整体版图、Bandgap/功率级版图和PEX后仿结果即可。
 
 \subsection{优势与后续提升方向}
 
@@ -1647,10 +1684,10 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \subsection{后续工作}
 
 \begin{enumerate}[leftmargin=2em]
-  \item 完成整体版图绘制，并进行DRC/LVS验证。
+  \item 补齐整体版图、Bandgap和功率级版图，并完成剩余DRC/LVS/ERC验证截图整理。
   \item 提取寄生参数，开展全PVT后仿验证，确认前仿阶段获得的精度、功耗和负载能力优势。
   \item 结合后仿结果微调功率管、补偿网络、反馈电阻网络和保护电路尺寸。
-  \item 补充版图、DRC/LVS和后仿结果，形成从原理图设计到版图验证的完整交付闭环。
+  \item 补充PEX后仿结果，形成从原理图设计到版图验证的完整交付闭环。
 \end{enumerate}
 
 % ==================
