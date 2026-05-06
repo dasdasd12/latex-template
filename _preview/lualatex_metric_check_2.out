@@ -1,0 +1,237 @@
+This is LuaHBTeX, Version 1.21.0 (TeX Live 2025) 
+ restricted system commands enabled.
+(./main.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ (c:/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(c:/texlive/2025/texmf-dist/tex/latex/base/size12.clo))
+(c:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec.sty
+(c:/texlive/2025/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(c:/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty
+(c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-luatex.def)))
+(c:/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec-luatex.sty
+(c:/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/addons/luatexja-fontspec.sty
+(c:/texlive/2025/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/luatexja.sty
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/luatexja-core.sty
+(c:/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty)
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexbase/luatexbase.sty
+(c:/texlive/2025/texmf-dist/tex/luatex/ctablestack/ctablestack.sty))
+(c:/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/keyval.tex))))
+(c:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/everyhook/everyhook.sty
+(c:/texlive/2025/texmf-dist/tex/latex/svn-prov/svn-prov.sty))
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/ltj-base.sty)
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/ltj-latex.sty
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjfont.sty
+(c:/texlive/2025/texmf-dist/tex/latex/base/tuenc.def))
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjdefs.sty
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/jfm-ujisv.lua)
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/jfm-ujis.lua))
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjcore.sty)
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-atbegshi.sty)
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-fontspec.sty)
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-geometry.sty
+(c:/texlive/2025/texmf-dist/tex/generic/iftex/ifluatex.sty))))
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/luatexja-compat.sty))
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/addons/luatexja-fontspec-29e.st
+y)) (c:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+(c:/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-def/luatex.def)))
+(c:/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty
+(c:/texlive/2025/texmf-dist/tex/latex/tools/array.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/siunitx/siunitx.sty
+(c:/texlive/2025/texmf-dist/tex/latex/translations/translations.sty))
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-siunitx.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
+(c:/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/nameref.sty
+(c:/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(c:/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(c:/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(c:/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def)
+(c:/texlive/2025/texmf-dist/tex/latex/url/url.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
+(c:/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/hluatex.def
+(c:/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(c:/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(c:/texlive/2025/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/titlesec/titlesec.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+(c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(c:/texlive/2025/texmf-dist/tex/latex/listings/listings.sty
+(c:/texlive/2025/texmf-dist/tex/latex/listings/lstpatch.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/listings/listings.cfg))
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-listings.sty
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexbase/luatexbase-cctb.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/float/float.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/appendix/appendix.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/tools/indentfirst.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/setspace/setspace.sty)
+(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-array.sty)
+(./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: luatex
+(c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(c:/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(c:/texlive/2025/texmf-dist/tex/latex/translations/translations-basic-dictionar
+y-english.trsl) (./main.out) (./main.out)
+
+LaTeX Font Warning: Font shape `JT3/STSong(0)/b/n' undefined
+(Font)              using `JT3/STSong(0)/m/n' instead on input line 145.
+
+
+LaTeX Font Warning: Font shape `JY3/STSong(0)/b/n' undefined
+(Font)              using `JY3/STSong(0)/m/n' instead on input line 145.
+
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd)
+[1{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<./fig/cicc_log
+o.png>] (./main.toc
+
+warning  (pdf backend): ignoring duplicate destination with the name 'page.1'
+[1])
+[2]
+[3]
+[4<./fig/schematic/symbol.png>]
+[5<./fig/schematic/architecture.png>]
+[6<./fig/schematic/example.png>]
+[7<./fig/schematic/bandgap.png>]
+[8]
+[9<./fig/schematic/ea.png><./fig/schematic/opaall.png>]
+[10<./fig/schematic/opa1.png>]
+Overfull \hbox (11.59544pt too wide) in paragraph at lines 431--433
+[] [] $\OML/cmm/m/it/12 r[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 r[]\OMS/cmsy/m/n
+/12 k\OML/cmm/m/it/12 r[]$ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] []  
+[] [] [] [] [] [] [] [] []  $R[] \OMS/cmsy/m/n/12 ^^Y
+
+[11]
+[12<./fig/schematic/opa2.png>]
+[13]
+[14]
+[15<./fig/schematic/OVC.png>]
+[16<./fig/schematic/thermal_shutdown.png>]
+[17<./fig/schematic/EN.png>]
+[18<./fig/schematic/psrr.png>]
+[19<./fig/bandgap/vref.png>]
+[20<./fig/bandgap/power.png>]
+Overfull \hbox (4.09128pt too wide) in paragraph at lines 702--703
+[][] [] [][]\TU/lmr/m/n/12 3[][] [] [] []  [] 3.165--3.435V [] [] [] [] [] [] [
+] []  Bandgap [] [] [] [] [] 11.47--24.81ppm/$[][]$C[]
+
+[21<./fig/bandgap/phase&gain.png>]
+[22<./fig/bandgap/powerup.png><./fig/bandgap/powerdown.png>]
+[23<./fig/psr/gain&phase_1.4.png>]
+[24<./fig/psr/gain&phase_1.8.png>]
+[25<./fig/psr/gain&phase_2.4.png>]
+[26<./fig/Thermal_shutdown/temp_up.png><./fig/Thermal_shutdown/temp_down.png>]
+[27<./fig/OVC/1.8out.png>]
+[28<./fig/en/en.png>]
+[29<./fig/output_votage/36_out.png><./fig/output_votage/3.6_out.png><./fig/outp
+ut_votage/2_out.png>]
+[30<./fig/output_votage/1.8V_out.png>]
+[31<./fig/output_votage/1.4V_out.png>]
+[32<./fig/output_votage/2.4V_out.png>]
+[33]
+[34<./fig/psr/psr_1.4.png>]
+[35<./fig/psr/psr_1.8.png>]
+[36<./fig/psr/psr_2.4.png>]
+Overfull \hbox (8.36945pt too wide) in paragraph at lines 1347--1348
+[][] |\JY3/STSong(0)/b/n/12 上 [] [] [] [] [] []  [] [] [] \TU/lmr/m/n/12 1kHz
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] []  [] [] $\OMS/cmsy/m/n/12 j\OML/cm
+m/m/it/12 PSR\OMS/cmsy/m/n/12 j$ [] [] \TU/lmr/m/n/12 100.90dB[]
+
+[37]
+[38<./fig/power/1.8V_out.png>]
+[39<./fig/power/1.4V_out.png><./fig/power/2.4V_out.png>]
+[40<./fig/OVC/1.4out.png>]
+[41<./fig/OVC/2.4out.png>]
+[42<./fig/Thermal_shutdown/temp_up_ctrl.png><./fig/Thermal_shutdown/temp_down_c
+trl.png>]
+[43<./fig/layout/Error_Amplifier_layout.png><./fig/layout/current_limit_layout.
+png><./fig/layout/Thermal_Shutdown_layout.png><./fig/layout/Digital_layout.png>
+]
+[44<./fig/layout/Error_Amplifier_DRC.png><./fig/layout/Error_Amplifier_LVS.png>
+<./fig/layout/Error_Amplifier_ERC.png><./fig/layout/current_limit_DRC.png><./fi
+g/layout/current_limit_LVS.png><./fig/layout/current_limit_ERC.png>]
+[45<./fig/layout/Thermal_Shutdown_DRC.png><./fig/layout/Thermal_Shutdown_LVS.pn
+g><./fig/layout/Thermal_Shutdown_ERC.png><./fig/layout/Digital_DRC.png><./fig/l
+ayout/Digital_LVS.png><./fig/layout/Digital_ERC.png>]
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 1677--1678
+[][] [] [] [] [] \TU/lmr/m/n/12 PVT [] [] [] [] [] [] [] [] [] [] [] 1kHz [] []
+ [] [] [] [] []  [] [] PSR [] [] 100.90dB []
+
+[46]
+[47] (./main.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+)
+(see the transcript file for additional information)
+ 1022 words of node memory still in use:
+   10 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 179 attribute, 59 glue_s
+pec, 27 attribute_list, 1 write, 13 user_defined nodes
+   avail lists: 1:42,2:68225,3:444,4:840,5:248,6:102,7:7884,8:73,9:1753,10:20,1
+1:176
+<c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman12-italic.otf><c:/t
+exlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman6-regular.otf><c:/texliv
+e/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf><c:/texlive/202
+5/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/te
+xmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-
+dist/fonts/opentype/public/lm/lmroman12-bold.otf><c:/texlive/2025/texmf-dist/fo
+nts/opentype/public/lm/lmroman17-regular.otf><c:/Windows/Fonts/STSONG.TTF><c:/t
+exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/20
+25/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2025/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/20
+25/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2025/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy8.pfb>
+Output written on main.pdf (48 pages, 22996555 bytes).
+Transcript written on main.log.
