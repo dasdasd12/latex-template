@@ -10,18 +10,28 @@
 % ============================================================
 \usepackage{iftex}
 \usepackage{fontspec}
+\setmainfont{Times New Roman}
 \ifLuaTeX
   \usepackage{luatexja-fontspec}
   \setmainjfont{STSong}
   \setsansjfont{SimHei}
   \setmonojfont{STFangsong}
+  \newcommand{\songti}{\rmfamily}
+  \newcommand{\heiti}{\sffamily}
 \else
   \usepackage{xeCJK}
   % 自动检测系统中文字体（STSong 没有粗体，用假粗体）
   \setCJKmainfont[BoldFont={STSong},BoldFeatures={FakeBold=2},ItalicFont={STFangsong}]{STSong}
-  \setCJKsansfont{STHeiti}
+  \setCJKsansfont{SimHei}
   \setCJKmonofont{STFangsong}
+  \setCJKfamilyfont{zhsong}[BoldFont={STSong},BoldFeatures={FakeBold=2},ItalicFont={STFangsong}]{STSong}
+  \setCJKfamilyfont{zhhei}[BoldFont={SimHei},BoldFeatures={FakeBold=2}]{SimHei}
+  \newcommand{\songti}{\CJKfamily{zhsong}}
+  \newcommand{\heiti}{\CJKfamily{zhhei}}
 \fi
+\newcommand{\sanhao}{\fontsize{16bp}{16bp}\selectfont}
+\newcommand{\sihao}{\fontsize{14bp}{14bp}\selectfont}
+\newcommand{\xiaosi}{\fontsize{12bp}{12bp}\selectfont}
 
 % ============================================================
 % 宏包导入
@@ -76,12 +86,15 @@
 % ============================================================
 % 标题格式
 % ============================================================
-\titleformat{\section}
-  {\Large\bfseries\color{icblue}}{\thesection}{1em}{}
-\titleformat{\subsection}
-  {\large\bfseries}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}
-  {\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\section}[block]
+  {\centering\heiti\bfseries\sanhao\setstretch{1}}{\thesection}{1em}{}
+\titleformat{\subsection}[block]
+  {\raggedright\heiti\bfseries\sihao\setstretch{1}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[block]
+  {\raggedright\heiti\bfseries\xiaosi\setstretch{1}}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsection}{0pt}{0.5\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0.5\baselineskip}{0.5\baselineskip}
 
 % ============================================================
 % 图表标题设置
@@ -89,16 +102,24 @@
 \renewcommand{\contentsname}{目录}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
-\captionsetup[figure]{labelsep=quad, font=small, skip=4pt}
-\captionsetup[table]{labelsep=quad, font=small, skip=4pt}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+\DeclareCaptionLabelSeparator{zhhyphen}{-}
+\DeclareCaptionLabelFormat{zhfigure}{图#2}
+\DeclareCaptionLabelFormat{zhtable}{表#2}
+\captionsetup{justification=centering,singlelinecheck=false}
+\captionsetup[figure]{labelformat=zhfigure,labelsep=zhhyphen, font=small, skip=4pt, position=bottom}
+\captionsetup[table]{labelformat=zhtable,labelsep=zhhyphen, font=small, skip=4pt, position=bottom}
 \setlength{\floatsep}{8pt plus 2pt minus 2pt}
 \setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
 \setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\allowdisplaybreaks
+\setlength{\jot}{4pt}
 
 \makeatletter
 \renewcommand{\tableofcontents}{%
   \begin{center}
-    {\Large\bfseries\color{icblue} \contentsname}
+    {\sanhao\heiti\bfseries \contentsname}
   \end{center}
   \vspace{1em}
   \@starttoc{toc}%
@@ -114,6 +135,17 @@
 \newcommand{\spec}[1]{\textbf{#1}}
 % 接口定义表格列类型
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+% 文献脚注，编号与文末参考文献列表一致
+\newcommand{\fnHeLDO}{\footnote{参考文献[1]：王忆、何乐年，《CMOS低压差线性稳压器》，科学出版社，2012。}}
+\newcommand{\fnSansen}{\footnote{参考文献[2]：W. M. C. Sansen, \textit{Analog Design Essentials}. Springer, 2006.}}
+\newcommand{\fnRazavi}{\footnote{参考文献[3]：B. Razavi, \textit{Design of Analog CMOS Integrated Circuits}, 2nd ed. McGraw-Hill Education, 2017.}}
+\newcommand{\fnGray}{\footnote{参考文献[4]：P. R. Gray, P. J. Hurst, S. H. Lewis, and R. G. Meyer, \textit{Analysis and Design of Analog Integrated Circuits}, 5th ed. Wiley, 2009.}}
+\newcommand{\fnAllen}{\footnote{参考文献[5]：P. E. Allen and D. R. Holberg, \textit{CMOS Analog Circuit Design}, 3rd ed. Oxford University Press, 2011.}}
+\newcommand{\fnWidlar}{\footnote{参考文献[6]：R. J. Widlar, ``New developments in IC voltage regulators,'' \textit{IEEE Journal of Solid-State Circuits}, vol. SC-6, no. 1, pp. 2--7, Feb. 1971.}}
+\newcommand{\fnBrokaw}{\footnote{参考文献[7]：A. P. Brokaw, ``A simple three-terminal IC bandgap reference,'' \textit{IEEE Journal of Solid-State Circuits}, vol. 9, no. 6, pp. 388--393, Dec. 1974.}}
+\newcommand{\fnRinconMora}{\footnote{参考文献[8]：G. A. Rincon-Mora and P. E. Allen, ``A low-voltage, low quiescent current, low drop-out regulator,'' \textit{IEEE Journal of Solid-State Circuits}, vol. 33, no. 1, pp. 36--44, Jan. 1998.}}
+\newcommand{\fnLeung}{\footnote{参考文献[9]：K. N. Leung and P. K. T. Mok, ``A capacitor-free CMOS low-dropout regulator with damping-factor-control frequency compensation,'' \textit{IEEE Journal of Solid-State Circuits}, vol. 38, no. 10, pp. 1691--1702, Oct. 2003.}}
+\newcommand{\fnAlShyoukh}{\footnote{参考文献[10]：M. Al-Shyoukh, H. Lee, and R. Perez, ``A transient-enhanced low-quiescent current low-dropout regulator with buffer impedance attenuation,'' \textit{IEEE Journal of Solid-State Circuits}, vol. 42, no. 8, pp. 1732--1742, Aug. 2007.}}
 % 封面信息填写线
 \newcommand{\coverfield}[2]{%
   \noindent\makebox[0.16\linewidth][l]{\Large #1：}%
@@ -161,6 +193,8 @@
   \vfill
 \end{titlepage}
 
+\songti
+\xiaosi
 \setstretch{1.5}
 \setlength{\parskip}{0pt}
 
@@ -197,8 +231,6 @@
 \subsection{指标说明}
 \begin{table}[H]
   \centering
-  \caption{项目关键指标汇总}
-  \label{tab:spec-summary}
   \small
   \setlength{\tabcolsep}{4pt}
   \begin{tabularx}{\textwidth}{clXX}
@@ -214,9 +246,11 @@
     7 & 过温保护 & 支持升温关断与降温恢复 & 具备过热保护 \\
     8 & 输出限流保护 & 限流点约1.1--1.4\,A & 具备输出限流保护 \\
     9 & 工作温度 & -40--125\,℃完成验证 & -40--125\,℃ \\
-    10 & 工艺与版图验证 & TSMC 40\,nm；已补充部分模块版图及验证截图 & 工艺40\,nm，需DRC/LVS \\
+    10 & 工艺与版图验证 & TSMC 40\,nm；版图覆盖Bandgap、LDO及主要子模块，部分模块完成物理验证 & 工艺40\,nm，需DRC/LVS \\
     \bottomrule
   \end{tabularx}
+  \caption{项目关键指标汇总}
+  \label{tab:spec-summary}
 \end{table}
 % ==================
 % 2. 模块接口说明
@@ -230,8 +264,6 @@
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{芯片引脚接口定义}
-  \label{tab:pinout}
   \begin{tabular}{clcccp{4cm}}
     \toprule
     序号 & 接口名 & A/D & 电平 & I/O & 备注 \\
@@ -246,6 +278,8 @@
     8 & GND & A & 0 & I  & 地 \\
     \bottomrule
   \end{tabular}
+  \caption{芯片引脚接口定义}
+  \label{tab:pinout}
 \end{table}
 \clearpage
 
@@ -256,7 +290,7 @@
 
 \subsection{电路架构}
 
-本作品使用传统LDO架构，包含电压基准、误差放大器、功率晶体管和反馈网络等核心模块。整体架构如图~\ref{fig:architecture}所示。
+本作品使用传统LDO架构，包含电压基准、误差放大器、功率晶体管和反馈网络等核心模块\fnWidlar\fnRinconMora。整体架构如图~\ref{fig:architecture}所示。
 
 % 示例：插入架构框图
 \begin{figure}[H]
@@ -303,7 +337,7 @@
 % ---- 模块1 ----
 \subsection{模块一：电压基准}
 
-本作品的电压基准模块采用经典的Bandgap基准设计，主要由启动电路、运放、温度补偿网络、电流镜和输出级组成。启动电路确保系统上电后能够正确进入工作状态；运放提供高增益以实现精确的电压比较；温度补偿网络利用PTAT电流和$V_{BE}$特性实现低温漂；电流镜提供稳定的偏置电流；输出级则负责驱动后续模块。
+本作品的电压基准模块采用经典的Bandgap基准设计\fnBrokaw\fnHeLDO，主要由启动电路、运放、温度补偿网络、电流镜和输出级组成。启动电路确保系统上电后能够正确进入工作状态；运放提供高增益以实现精确的电压比较；温度补偿网络利用PTAT电流和$V_{BE}$特性实现低温漂；电流镜提供稳定的偏置电流；输出级则负责驱动后续模块。
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{fig/schematic/bandgap.png}
@@ -392,7 +426,7 @@
 % ---- 模块2 ----
 \subsection{模块二：误差放大器}
 
-误差放大器是LDO的核心模块，其增益决定了输出电压的负载调整率和线性调整率，其频率特性决定了环路的稳定性和瞬态响应速度。本作品的误差放大器采用三级结构：第一级为折叠轨到轨差分输入级（含差分转单端），第二级为共源级放大器，两级级联构成高增益误差放大器；第三级为单位增益跟随器（复用折叠轨到轨OTA结构），作为缓冲级驱动功率管栅极。
+误差放大器是LDO的核心模块，其增益决定了输出电压的负载调整率和线性调整率，其频率特性决定了环路的稳定性和瞬态响应速度\fnRazavi\fnGray\fnAllen。本作品的误差放大器采用三级结构：第一级为折叠轨到轨差分输入级（含差分转单端），第二级为共源级放大器，两级级联构成高增益误差放大器；第三级为单位增益跟随器（复用折叠轨到轨OTA结构），作为缓冲级驱动功率管栅极。
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{fig/schematic/ea.png}
@@ -405,7 +439,7 @@
   \caption{EA详细电路图}
   \label{fig:ea-schematic}
 \end{figure}
-输入级选择折叠共源共栅结构是基于以下设计考量：折叠共源共栅是模拟IC设计中公认的最优折中运算放大器拓扑~\cite{Sansen2008}——在功耗、速度、噪声和输出摆幅四项指标间取得了良好的平衡。相比于套筒式共源共栅，折叠结构的输入共模范围可以天然地覆盖其中一个电源轨（GND），这使得互补PMOS/NMOS并联输入时可实现全轨到轨共模输入范围；相比于对称性OTA，折叠结构避免了电流镜引入的额外非主极点，可以获得更高的GBW。此外，折叠结构输入差分对看到完全对称的直流偏置和负载阻抗，有利于降低失调电压并改善CMRR。
+输入级选择折叠共源共栅结构是基于以下设计考量：折叠共源共栅是模拟IC设计中公认的最优折中运算放大器拓扑\fnSansen——在功耗、速度、噪声和输出摆幅四项指标间取得了良好的平衡。相比于套筒式共源共栅，折叠结构的输入共模范围可以天然地覆盖其中一个电源轨（GND），这使得互补PMOS/NMOS并联输入时可实现全轨到轨共模输入范围；相比于对称性OTA，折叠结构避免了电流镜引入的额外非主极点，可以获得更高的GBW。此外，折叠结构输入差分对看到完全对称的直流偏置和负载阻抗，有利于降低失调电压并改善CMRR。
 
 \subsubsection{第一级放大器分析}
 
@@ -446,7 +480,7 @@
 \begin{gather}
   p_{nd} \approx \frac{g_{m,cascode}}{C_p}
 \end{gather}
-由于$g_{m,cascode}/C_p$接近晶体管的特征频率$f_t$，该非主极点可达$f_t/3$甚至更高~\cite{Sansen2008}，远高于输出极点。因此折叠共源共栅级仅有单一的有效非主极点，易于获得高GBW，这是本设计选择该拓扑的重要原因。
+由于$g_{m,cascode}/C_p$接近晶体管的特征频率$f_t$，该非主极点可达$f_t/3$甚至更高\fnSansen，远高于输出极点。因此折叠共源共栅级仅有单一的有效非主极点，易于获得高GBW，这是本设计选择该拓扑的重要原因。
 
 \paragraph{1b. 共源级放大器}
 
@@ -487,7 +521,7 @@
 \begin{enumerate}[leftmargin=2em]
   \item \textbf{阻抗变换：} 共源级输出阻抗$R_{out,CS}$较高，直接驱动功率管栅极电容（通常数十pF）会导致建立时间过长。单位增益跟随器将输出阻抗降低至$1/g_{m,out}$量级，显著加快功率管栅极的充放电速度。
   \item \textbf{隔离前后级：} 缓冲级将共源级高阻抗输出与功率管栅极大电容隔离，避免次极点被拉低至GBW以内，有利于环路稳定性。
-  \item \textbf{频率补偿（UGCC）：} 缓冲级还兼作单位增益补偿模块，内部补偿网络通过零极点抵消策略改善环路相位裕度，并降低对输出电容ESR的要求，使系统可以使用低成本陶瓷电容~\cite{He2012}。
+  \item \textbf{频率补偿（UGCC）：} 缓冲级还兼作单位增益补偿模块，内部补偿网络通过零极点抵消策略改善环路相位裕度，并降低对输出电容ESR的要求，使系统可以使用低成本陶瓷电容\fnHeLDO\fnLeung。
   \item \textbf{改善PSR性能：} 缓冲级从$V_{DD}$到输出的馈通被闭环增益所抑制，电源噪声对功率管栅极的耦合大幅降低，从而改善系统整体PSR。
 \end{enumerate}
 
@@ -518,7 +552,7 @@
 \begin{gather}
   GBW < \frac{p_2}{2}
 \end{gather}
-此外，本设计的第三级缓冲级（单位增益跟随器）还承担了单位增益补偿模块（UGCC）的角色~\cite{He2012}。缓冲级内部的补偿网络（$R_z$、$C_z$）在环路传递函数中引入一个额外的零点：
+此外，本设计的第三级缓冲级（单位增益跟随器）还承担了单位增益补偿模块（UGCC）的角色\fnHeLDO\fnAlShyoukh。缓冲级内部的补偿网络（$R_z$、$C_z$）在环路传递函数中引入一个额外的零点：
 \begin{gather}
   Z_{UGCC} = \frac{1}{R_z \cdot C_z}
 \end{gather}
@@ -604,7 +638,7 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{gather}
 在Cadence AC仿真中，电源到输出的传递结果通常表现为负dB值。后文表格中的$|PSR|$即对该负dB值取绝对值，等效表示系统在对应频点的电源抑制能力。
 
-根据多级反馈系统理论~\cite{He2012}，LDO从$V_{DD}$到$V_{OUT}$的噪声耦合会经过误差放大器、缓冲级、功率管以及输出节点寄生电容等多条路径。若将开环增益记为$A_{loop}$，反馈系数记为$\beta = R_{F2}/(R_{F1}+R_{F2})$，则低频闭环抑制可定性表示为：
+根据多级反馈系统理论\fnHeLDO，LDO从$V_{DD}$到$V_{OUT}$的噪声耦合会经过误差放大器、缓冲级、功率管以及输出节点寄生电容等多条路径。若将开环增益记为$A_{loop}$，反馈系数记为$\beta = R_{F2}/(R_{F1}+R_{F2})$，则低频闭环抑制可定性表示为：
 \begin{gather}
   H_{PS,LDO}(s) \approx
   \frac{H_{EA}(s)+H_{BUF}(s)+H_{POW}(s)}
@@ -675,8 +709,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 根据上述输出电压、静态电流和STB仿真结果，将Bandgap模块的相位裕度、温漂系数和最大静态电流整理如下：
 \begin{table}[H]
   \centering
-  \caption{Bandgap模块全PVT仿真结果}
-  \label{tab:bandgap-pvt}
   \scriptsize
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lcccccc}
@@ -698,6 +730,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.435 & 65.28 & 69.10 & 72.25 & 24.81 & 5.513 \\
     \bottomrule
   \end{tabular}
+  \caption{Bandgap模块全PVT仿真结果}
+  \label{tab:bandgap-pvt}
 \end{table}
 由表~\ref{tab:bandgap-pvt}可见，在3.165--3.435\,V输入电压范围内，Bandgap温漂系数为11.47--24.81\,ppm/$^\circ$C，其中tt工艺角、3.3\,V输入下温漂系数为11.51\,ppm/$^\circ$C，参考电压在输入电压、温度和工艺角变化下保持了较好的稳定性。内部放大器相位裕度最小为61.12$^\circ$，出现在ff工艺角、$V_{IN}=3.435$\,V、-40\,℃条件下，所有扫描点均大于60$^\circ$，满足稳定性设计要求。静态电流全PVT范围为5.301--8.683\,$\mu$A，最大值出现在ff工艺角、$V_{IN}=3.435$\,V条件下，整体功耗较低。
 
@@ -737,8 +771,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{1.4\,V输出时主环路相位裕度仿真结果（单位：$^\circ$）}
-  \label{tab:loop-pm-1p4}
   \scriptsize
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -785,6 +817,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 5\,mA & 123.30 & 119.20 & 118.20 \\
     \bottomrule
   \end{tabular}
+  \caption{1.4\,V输出时主环路相位裕度仿真结果（单位：$^\circ$）}
+  \label{tab:loop-pm-1p4}
 \end{table}
 \begin{figure}[H]
   \centering
@@ -794,8 +828,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{1.8\,V输出时主环路相位裕度仿真结果（单位：$^\circ$）}
-  \label{tab:loop-pm-1p8}
   \scriptsize
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -842,6 +874,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 5\,mA & 114.20 & 111.50 & 110.80 \\
     \bottomrule
   \end{tabular}
+  \caption{1.8\,V输出时主环路相位裕度仿真结果（单位：$^\circ$）}
+  \label{tab:loop-pm-1p8}
 \end{table}
 \begin{figure}[H]
   \centering
@@ -851,8 +885,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{2.4\,V输出时主环路相位裕度仿真结果（单位：$^\circ$）}
-  \label{tab:loop-pm-2p4}
   \scriptsize
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -899,6 +931,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 5\,mA & 103.40 & 105.50 & 105.50 \\
     \bottomrule
   \end{tabular}
+  \caption{2.4\,V输出时主环路相位裕度仿真结果（单位：$^\circ$）}
+  \label{tab:loop-pm-2p4}
 \end{table}
 从上述主环路STB仿真结果可以看出，1.4\,V和1.8\,V输出条件下全部扫描点的相位裕度均大于90$^\circ$，主环路具有充足稳定裕量；2.4\,V输出条件下，有效扫描点的相位裕度最低为60.20$^\circ$，同样满足稳定性设计要求。从有效扫描结果看，主环路在宽输出电压和大负载范围内保持了良好的稳定性。
 
@@ -1036,8 +1070,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{1.8\,V输出电压精度仿真结果（单位：\%）}
-  \label{tab:output-voltage-accuracy-1p8}
   \small
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -1055,6 +1087,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 0.4365 & 0.4398 & 0.4463 & 0.4490 \\
     \bottomrule
   \end{tabular}
+  \caption{1.8\,V输出电压精度仿真结果（单位：\%）}
+  \label{tab:output-voltage-accuracy-1p8}
 \end{table}
 \begin{figure}[H]
   \centering
@@ -1064,8 +1098,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{1.4\,V输出电压精度仿真结果（单位：\%）}
-  \label{tab:output-voltage-accuracy-1p4}
   \small
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -1083,6 +1115,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 0.4364 & 0.4396 & 0.4461 & 0.4488 \\
     \bottomrule
   \end{tabular}
+  \caption{1.4\,V输出电压精度仿真结果（单位：\%）}
+  \label{tab:output-voltage-accuracy-1p4}
 \end{table}
 \begin{figure}[H]
   \centering
@@ -1092,8 +1126,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{2.4\,V输出电压精度仿真结果（单位：\%）}
-  \label{tab:output-voltage-accuracy-2p4}
   \small
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -1111,6 +1143,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 0.4440 & 0.4490 & 0.4559 & 0.4586 \\
     \bottomrule
   \end{tabular}
+  \caption{2.4\,V输出电压精度仿真结果（单位：\%）}
+  \label{tab:output-voltage-accuracy-2p4}
 \end{table}
 可以看出，除了工艺角外，其余条件对输出电压精度影响很小。表中每个数据点均由同一仿真条件下的上偏差和下偏差取绝对值较大者得到。输出电压精度计算公式为：
 \begin{gather}
@@ -1119,8 +1153,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 对各输出电压的所有仿真条件继续取最大值，得到系统的输出电压精度汇总如下表：
 \begin{table}[H]
   \centering
-  \caption{系统输出电压精度表}
-  \label{tab:output-voltage-accuracy}
   \begin{tabular}{lccc}
     \toprule
     输出电压 & 1.4\,V & 1.8\,V & 2.4\,V \\
@@ -1128,6 +1160,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     全温度下最差输出电压精度 & 0.4488\% & 0.4490\% & 0.4586\% \\
     \bottomrule
   \end{tabular}
+  \caption{系统输出电压精度表}
+  \label{tab:output-voltage-accuracy}
 \end{table}
 仿真结果表明，系统的输出电压精度满足项目需求，能够在全PVT条件下保持稳定，误差均小于0.5\%。
 
@@ -1138,7 +1172,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 为便于将仿真曲线与完整扫描数据逐项对照，后续将每个输出电压点的PSR曲线和对应明细表安排在同一页展示。本页先给出扫描矩阵和读图说明。该扫描覆盖工艺、电源电压、温度和负载四类主要变量，能够同时反映典型工作点、重载工作点以及边界PVT条件下的电源噪声抑制表现。
 \begin{table}[H]
   \centering
-  \caption*{1\,kHz PSR扫描设置与统计口径}
   \small
   \setlength{\tabcolsep}{4pt}
   \begin{tabularx}{\textwidth}{lX}
@@ -1152,6 +1185,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     读图重点 & 图中曲线用于观察1\,kHz附近的抑制能力，表中数据用于量化不同PVT和负载组合下的PSR表现。 \\
     \bottomrule
   \end{tabularx}
+  \caption{1\,kHz PSR扫描设置与统计口径}
+  \label{tab:psr-settings}
 \end{table}
 从扫描设置可以看出，PSR验证并非只针对单一典型点，而是覆盖了输出电压范围、输入电压波动、温度变化和负载变化的组合。后续三组曲线和表格分别对应1.4\,V、1.8\,V和2.4\,V输出条件，可直观展示本设计在多个工作点下的高PSR能力，其中最高$|PSR|$达到100.90\,dB。
 
@@ -1164,8 +1199,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{1.4\,V输出时1\,kHz PSR完整扫描结果}
-  \label{tab:system-psr-1p4}
   \scriptsize
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -1212,6 +1245,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 5\,mA & 78.46 & 79.10 & 79.56 \\
     \bottomrule
   \end{tabular}
+  \caption{1.4\,V输出时1\,kHz PSR完整扫描结果}
+  \label{tab:system-psr-1p4}
 \end{table}
 \begin{figure}[H]
   \centering
@@ -1221,8 +1256,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{1.8\,V输出时1\,kHz PSR完整扫描结果}
-  \label{tab:system-psr-1p8}
   \scriptsize
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -1269,6 +1302,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 5\,mA & 75.92 & 76.51 & 76.90 \\
     \bottomrule
   \end{tabular}
+  \caption{1.8\,V输出时1\,kHz PSR完整扫描结果}
+  \label{tab:system-psr-1p8}
 \end{table}
 \begin{figure}[H]
   \centering
@@ -1278,8 +1313,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{2.4\,V输出时1\,kHz PSR完整扫描结果}
-  \label{tab:system-psr-2p4}
   \scriptsize
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -1326,11 +1359,11 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 5\,mA & 74.19 & 74.66 & 74.78 \\
     \bottomrule
   \end{tabular}
+  \caption{2.4\,V输出时1\,kHz PSR完整扫描结果}
+  \label{tab:system-psr-2p4}
 \end{table}
 \begin{table}[H]
   \centering
-  \caption{系统1\,kHz PSR全PVT扫描统计}
-  \label{tab:system-psr-summary}
   \footnotesize
   \setlength{\tabcolsep}{3pt}
   \begin{tabularx}{\textwidth}{ccccX}
@@ -1343,6 +1376,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     合计 & 324 & 150 & 63.36--100.90 & 多个PVT与负载组合达到80\,dB以上，最高PSR达到100.90\,dB \\
     \bottomrule
   \end{tabularx}
+  \caption{系统1\,kHz PSR全PVT扫描统计}
+  \label{tab:system-psr-summary}
 \end{table}
 由上述结果可知，系统在1\,kHz下具备较强的电源噪声抑制能力，最高$|PSR|$达到100.90\,dB。三档输出电压共324个扫描点中，有150个点达到80\,dB以上；其中1.4\,V输出点表现最为均衡，83/108个扫描点达到80\,dB以上。1.8\,V典型输出点在900\,mA重载条件下仍可取得较高PSR，2.4\,V高输出电压条件下也能获得超过100\,dB的抑制峰值。整体来看，误差放大器高增益、缓冲隔离和闭环反馈对电源噪声具有明显抑制作用，系统已完成覆盖低压、高温和重载等条件的充分PSR验证。
 
@@ -1363,8 +1398,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{1.8\,V输出电压时的静态电流仿真结果（$T=125\,℃$，单位：$\mu$A）}
-  \label{tab:power-1p8}
   \small
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -1382,6 +1415,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 16.26 & 16.06 & 15.85 & 15.81 \\
     \bottomrule
   \end{tabular}
+  \caption{1.8\,V输出电压时的静态电流仿真结果（$T=125\,℃$，单位：$\mu$A）}
+  \label{tab:power-1p8}
 \end{table}
 \begin{figure}[H]
   \centering
@@ -1391,8 +1426,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{1.4\,V输出电压时的静态电流仿真结果（$T=125\,℃$，单位：$\mu$A）}
-  \label{tab:power-1p4}
   \small
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -1410,6 +1443,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 16.24 & 16.05 & 15.85 & 15.81 \\
     \bottomrule
   \end{tabular}
+  \caption{1.4\,V输出电压时的静态电流仿真结果（$T=125\,℃$，单位：$\mu$A）}
+  \label{tab:power-1p4}
 \end{table}
 \begin{figure}[H]
   \centering
@@ -1419,8 +1454,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{2.4\,V输出电压时的静态电流仿真结果（$T=125\,℃$，单位：$\mu$A）}
-  \label{tab:power-2p4}
   \small
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccccc}
@@ -1438,6 +1471,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     ss & 3.465 & 16.36 & 16.06 & 15.85 & 15.81 \\
     \bottomrule
   \end{tabular}
+  \caption{2.4\,V输出电压时的静态电流仿真结果（$T=125\,℃$，单位：$\mu$A）}
+  \label{tab:power-2p4}
 \end{table}
 由表中数据可以看出，输入电压越高，系统静态电流越大；在同样的输入电压下，负载电流越大，静态电流也略有增加。25\,℃时的静态电流大约比125\,℃时低3--4\,$\mu$A。
 
@@ -1466,7 +1501,7 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
   \caption{过流保护模块临界I-V特性曲线（2.4\,V）}
   \label{fig:overcurrent-protection-2.4-iv}
 \end{figure}
-由于本次前仿未引入自热模型，且过温检测支路与外部负载无直接电连接，因此系统级过温验证主要扫描输出设定电压、工艺角、输入电压和温度。本文在1.4\,V、1.8\,V、2.4\,V三个输出设定点，tt、ss、ff三个工艺角以及3.135\,V、3.3\,V、3.465\,V三种输入电压下扫描温度，得到系统的过温保护性能如图所示。
+由于前仿阶段未引入自热模型，且过温检测支路与外部负载无直接电连接，因此系统级过温验证主要扫描输出设定电压、工艺角、输入电压和温度。本文在1.4\,V、1.8\,V、2.4\,V三个输出设定点，tt、ss、ff三个工艺角以及3.135\,V、3.3\,V、3.465\,V三种输入电压下扫描温度，得到系统的过温保护性能如图所示。
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{fig/thermal_shutdown/temp_up_ctrl.png}
@@ -1481,8 +1516,6 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \end{figure}
 \begin{table}[H]
   \centering
-  \caption{系统保护功能仿真结果汇总}
-  \label{tab:protection-summary}
   \begin{tabularx}{\textwidth}{llX}
     \toprule
     项目 & 仿真结果 & 说明 \\
@@ -1492,6 +1525,8 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
     过温恢复温度 & 约60\,℃ & 降温后重新开启主环路，形成温度迟滞 \\
     \bottomrule
   \end{tabularx}
+  \caption{系统保护功能仿真结果汇总}
+  \label{tab:protection-summary}
 \end{table}
 仿真结果表明，系统的过流保护和过温保护功能能够在设定的阈值条件下及时响应。过流限流点高于900\,mA工作电流，可在过载和短路趋势出现时限制输出电流；过温保护具有明显迟滞，能够避免系统在临界温度附近频繁开关，从而保护系统免受过流和过热损害。
 
@@ -1502,66 +1537,78 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 
 \subsection{模块版图}
 
-目前已补充误差放大器、限流保护、过温保护和数字控制模块版图。各模块版图如下。
+版图设计包括LDO顶层、Bandgap基准、误差放大器、限流保护、过温保护和数字控制模块版图。版图实现时优先保证电源通路、地线回流和关键模拟节点的连线可靠性，同时尽量缩短高阻节点和反馈节点走线，降低寄生电阻、电容对输出精度和环路稳定性的影响。各模块版图如下。
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{fig/layout/Error_Amplifier_layout.png}
-    \caption{误差放大器}
-    \label{fig:layout-ea}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[t]{0.48\textwidth}
+  \includegraphics[width=\textwidth]{fig/layout/LDO_layout.png}
+  \caption{LDO顶层}
+  \label{fig:layout-ldo}
+\end{figure}
+
+LDO顶层版图用于完成各功能模块的集成连接。顶层中重点考虑功率级大电流通路、电源/地线宽度以及模拟模块之间的相对位置，使Bandgap基准、误差放大器、功率管、反馈网络和保护模块能够形成完整主环路。该版图为后续顶层寄生提取和系统级后仿提供基础。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fig/layout/Bandgap_layout.png}
+  \caption{Bandgap基准}
+  \label{fig:layout-bandgap}
+\end{figure}
+
+Bandgap基准版图对应片内参考源和偏置支路。由于基准电压对器件匹配、寄生耦合和温度梯度较敏感，版图中需要重点关注匹配器件的相邻放置、偏置支路的紧凑连接以及电源/地隔离，从而减小版图寄生对温漂和参考电压精度的影响。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fig/layout/Error_Amplifier_layout.png}
+  \caption{误差放大器}
+  \label{fig:layout-ea}
+\end{figure}
+
+误差放大器是LDO主环路增益和稳定性的关键模块。其版图实现中应尽量保持差分输入相关器件的对称性，并缩短输入端、补偿节点和功率管栅极驱动节点的连线，降低寄生失配和额外极点对环路相位裕度的影响。
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{fig/layout/current_limit_layout.png}
     \caption{限流保护}
     \label{fig:layout-current-limit}
-  \end{subfigure}
-
-  \vspace{0.5em}
-
-  \begin{subfigure}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{fig/layout/Thermal_Shutdown_layout.png}
-    \caption{过温保护}
-    \label{fig:layout-thermal-shutdown}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{fig/layout/Digital_layout.png}
-    \caption{数字控制}
-    \label{fig:layout-digital}
-  \end{subfigure}
-  \caption{已完成模块版图}
-  \label{fig:layout-modules}
 \end{figure}
-
-\subsection{物理验证}
-
-已补充现有模块的DRC、LVS和ERC验证截图。
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[t]{0.48\textwidth}
+  \includegraphics[width=\textwidth]{fig/layout/Thermal_Shutdown_layout.png}
+  \caption{过温保护}
+  \label{fig:layout-thermal-shutdown}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fig/layout/Digital_layout.png}
+  \caption{数字控制}
+  \label{fig:layout-digital}
+\end{figure}
+
+限流保护、过温保护和数字控制模块均采用相对独立的模块化版图实现。限流保护版图重点保证电流检测支路与比较支路连接清晰，过温保护版图重点保证温度检测与迟滞控制支路的完整性，数字控制模块则与模拟敏感节点保持适当隔离，减少开关信号对基准和误差放大器的干扰。
+
+\subsection{物理验证}
+
+DRC用于确认版图满足TSMC 40\,nm工艺设计规则，LVS用于确认版图提取网表与原理图连接一致，ERC用于检查电源、地和器件连接中的潜在电气规则问题。LDO顶层版图见图~\ref{fig:layout-ldo}，顶层DRC/LVS验证与PEX后仿作为后续工作开展。下面的DRC结果中，所有未完成的检查均为版图密度检查。
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{fig/layout/Error_Amplifier_DRC.png}
     \caption{DRC}
     \label{fig:layout-ea-drc}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[t]{0.48\textwidth}
+  \begin{subfigure}[t]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{fig/layout/Error_Amplifier_LVS.png}
     \caption{LVS}
     \label{fig:layout-ea-lvs}
   \end{subfigure}
-
-  \vspace{0.5em}
-
-  \begin{subfigure}[t]{0.48\textwidth}
+  \begin{subfigure}[t]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{fig/layout/Error_Amplifier_ERC.png}
     \caption{ERC}
@@ -1569,6 +1616,32 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
   \end{subfigure}
   \caption{误差放大器模块物理验证结果}
   \label{fig:layout-ea-check}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Bandgap_DRC.png}
+    \caption{DRC}
+    \label{fig:layout-bandgap-drc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Bandgap_LVS.png}
+    \caption{LVS}
+    \label{fig:layout-bandgap-lvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/Bandgap_ERC.png}
+    \caption{ERC}
+    \label{fig:layout-bandgap-erc}
+  \end{subfigure}
+  \caption{Bandgap基准模块物理验证结果}
+  \label{fig:layout-bandgap-check}
 \end{figure}
 
 \begin{figure}[H]
@@ -1649,27 +1722,70 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
   \label{fig:layout-digital-check}
 \end{figure}
 
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/LDO_DRC.png}
+    \caption{DRC}
+    \label{fig:layout-ldo-drc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/LDO_LVS.png}
+    \caption{LVS}
+    \label{fig:layout-ldo-lvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/layout/LDO_ERC.png}
+    \caption{ERC}
+    \label{fig:layout-ldo-erc}
+  \end{subfigure}
+  \caption{LDO模块物理验证结果}
+  \label{fig:layout-ldo-check}
+\end{figure}
 
+
+综上，当前版图部分已覆盖LDO顶层和主要功能子模块，并完成了多个模块的物理验证结果整理。后续在顶层DRC/LVS确认通过后，可进一步进行PEX寄生提取，将版图寄生参数带回系统仿真，验证输出精度、静态电流、PSRR和环路稳定性在后仿条件下的保持情况。
 
 % ==================
 % 6. 项目总结
 % ==================
 \section{项目总结}
 
-\subsection{已完成工作}
+\subsection{性能参数总结}
 
-\begin{enumerate}[leftmargin=2em]
-  \item 完成了Bandgap基准、误差放大器、限流保护和过温保护等核心模块的电路设计与前仿验证。
-  \item 完成了LDO主环路的系统级前仿，验证了输出电压范围、输出电压精度、静态电流和负载能力。
-  \item 完成了1\,kHz系统PSR扫描和主环路相位裕度全PVT扫描，覆盖低压、高温和重载等严苛工况；PSR最高达到100.90\,dB，150/324个扫描点达到80\,dB以上。
-  \item 完成了过流保护和过温保护功能验证，证明系统在过载和高温条件下具有可靠保护能力。
-  \item 补充了误差放大器、限流保护、过温保护和数字控制模块的版图及物理验证截图。
-  \item 完成了关键指标与题目要求的对照分析，前仿结果满足输出精度、输出电流、静态电流和工作温度范围等基本指标。
-\end{enumerate}
+综合前述模块级和系统级仿真结果，本设计的主要性能参数汇总如表~\ref{tab:performance-summary}所示。表中结果均来自前仿或版图验证阶段的统计数据，覆盖tt/ss/ff工艺角、-40--125\,℃工作温度以及3.135--3.465\,V输入电压范围。
 
-\subsection{版图与验证补充}
-
-本次已将现有版图和验证截图补入第5章，覆盖误差放大器、限流保护、过温保护和数字控制模块。后续继续补齐整体版图、Bandgap/功率级版图和PEX后仿结果即可。
+\begin{table}[H]
+  \centering
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{\textwidth}{lXX}
+    \toprule
+    参数 & 仿真/验证结果 & 说明 \\
+    \midrule
+    工艺节点 & TSMC 40\,nm CMOS & 设计与版图工艺 \\
+    输入电压 & 3.3\,V典型值，3.135--3.465\,V扫描 & 覆盖$\pm5\%$电源波动 \\
+    输出电压范围 & 1.4--2.4\,V & 覆盖1.8\,V典型输出点 \\
+    输出电压精度 & 最差0.4586\% & 1.4\,V、1.8\,V、2.4\,V全PVT统计最大值 \\
+    输出电流能力 & 900\,mA稳定输出，最大约1.145\,A & 高于850\,mA进阶指标 \\
+    系统静态电流 & 最坏23.40\,$\mu$A & 125\,℃条件下统计最大值 \\
+    主环路相位裕度 & 最小60.20$^\circ$ & 1.4--2.4\,V、多负载全PVT STB结果 \\
+    1\,kHz PSR & 63.36--100.90\,dB，150/324点$\geq$80\,dB & 1.4\,V、1.8\,V、2.4\,V全PVT与负载扫描 \\
+    Bandgap温漂系数 & 11.47--24.81\,ppm/$^\circ$C & 3.165--3.435\,V输入范围统计 \\
+    Bandgap静态电流 & 5.301--8.683\,$\mu$A & 基准模块全PVT统计结果 \\
+    过流限流点 & 约1.1--1.4\,A & 高于900\,mA连续负载电流 \\
+    过温保护阈值 & 关断约150\,℃，恢复约60\,℃ & 具备温度迟滞保护 \\
+    版图验证 & 主要模块完成DRC/LVS/ERC验证 & 覆盖Bandgap、误差放大器、保护与控制模块 \\
+    \bottomrule
+  \end{tabularx}
+  \caption{主要性能参数总结}
+  \label{tab:performance-summary}
+\end{table}
 
 \subsection{优势与后续提升方向}
 
@@ -1682,34 +1798,32 @@ PSRR（Power Supply Rejection Ratio，电源抑制比）是衡量LDO抑制电源
 \subsection{后续工作}
 
 \begin{enumerate}[leftmargin=2em]
-  \item 补齐整体版图、Bandgap和功率级版图，并完成剩余DRC/LVS/ERC验证截图整理。
   \item 提取寄生参数，开展全PVT后仿验证，确认前仿阶段获得的精度、功耗和负载能力优势。
   \item 结合后仿结果微调功率管、补偿网络、反馈电阻网络和保护电路尺寸。
-  \item 补充PEX后仿结果，形成从原理图设计到版图验证的完整交付闭环。
+  \item 开展PEX后仿，形成从原理图设计到版图验证的完整交付闭环。
 \end{enumerate}
 
 % ==================
 % 参考文献
 % ==================
-\newpage
-\bibliographystyle{IEEEtran}
-% \bibliography{references}  % 取消注释并创建 references.bib 文件
-
-% 临时使用手动文献列表
+\clearpage
+\phantomsection
 \section*{参考文献}
 \addcontentsline{toc}{section}{参考文献}
+\begin{spacing}{1.0}
 \begin{thebibliography}{99}
-  \bibitem{He2012} 王忆，何乐年. \textit{CMOS低压差线性稳压器}. 北京：科学出版社，2012.
-  \bibitem{Sansen2008} W. M. C. Sansen, \textit{Analog Design Essentials}. Springer, 2006.
-  \bibitem{Razavi2017} B. Razavi, \textit{Design of Analog CMOS Integrated Circuits}, 2nd ed. McGraw-Hill, 2017.
-  \bibitem{Gray2009} P. R. Gray et al., \textit{Analysis and Design of Analog Integrated Circuits}, 5th ed. Wiley, 2009.
-  \bibitem{Allen2012} P. E. Allen and D. R. Holberg, \textit{CMOS Analog Circuit Design}, 3rd ed. Oxford University Press, 2012.
-  \bibitem{Widlar1971} R. J. Widlar, ``New developments in IC voltage regulators,'' \textit{IEEE Journal of Solid-State Circuits}, vol. SC-6, no. 1, pp. 2--7, Feb. 1971.
-  \bibitem{Brokaw1974} A. P. Brokaw, ``A simple three-terminal IC bandgap reference,'' \textit{IEEE Journal of Solid-State Circuits}, vol. 9, no. 6, pp. 388--393, Dec. 1974.
-  \bibitem{RinconMora1998} G. A. Rincon-Mora and P. E. Allen, ``A low-voltage, low quiescent current, low drop-out regulator,'' \textit{IEEE Journal of Solid-State Circuits}, vol. 33, no. 1, pp. 36--44, Jan. 1998.
-  \bibitem{Leung2003} K. N. Leung and P. K. T. Mok, ``A capacitor-free CMOS low-dropout regulator with damping-factor-control frequency compensation,'' \textit{IEEE Journal of Solid-State Circuits}, vol. 38, no. 10, pp. 1691--1702, Oct. 2003.
-  \bibitem{AlShyoukh2007} M. Al-Shyoukh, H. Lee, and R. Perez, ``A transient-enhanced low-quiescent current low-dropout regulator with buffer impedance attenuation,'' \textit{IEEE Journal of Solid-State Circuits}, vol. 42, no. 8, pp. 1732--1742, Aug. 2007.
+  \bibitem{He2012} 王忆，何乐年. CMOS低压差线性稳压器[M]. 北京：科学出版社，2012.
+  \bibitem{Sansen2006} W. M. C. Sansen. \textit{Analog Design Essentials}[M]. New York: Springer, 2006.
+  \bibitem{Razavi2017} B. Razavi. \textit{Design of Analog CMOS Integrated Circuits}[M], 2nd ed. New York: McGraw-Hill Education, 2017.
+  \bibitem{Gray2009} P. R. Gray, P. J. Hurst, S. H. Lewis, and R. G. Meyer. \textit{Analysis and Design of Analog Integrated Circuits}[M], 5th ed. Hoboken, NJ: Wiley, 2009.
+  \bibitem{Allen2011} P. E. Allen and D. R. Holberg. \textit{CMOS Analog Circuit Design}[M], 3rd ed. New York: Oxford University Press, 2011.
+  \bibitem{Widlar1971} R. J. Widlar. New developments in IC voltage regulators[J]. \textit{IEEE Journal of Solid-State Circuits}, 1971, SC-6(1): 2--7.
+  \bibitem{Brokaw1974} A. P. Brokaw. A simple three-terminal IC bandgap reference[J]. \textit{IEEE Journal of Solid-State Circuits}, 1974, 9(6): 388--393. DOI: 10.1109/JSSC.1974.1050532.
+  \bibitem{RinconMora1998} G. A. Rincon-Mora and P. E. Allen. A low-voltage, low quiescent current, low drop-out regulator[J]. \textit{IEEE Journal of Solid-State Circuits}, 1998, 33(1): 36--44. DOI: 10.1109/4.654935.
+  \bibitem{Leung2003} K. N. Leung and P. K. T. Mok. A capacitor-free CMOS low-dropout regulator with damping-factor-control frequency compensation[J]. \textit{IEEE Journal of Solid-State Circuits}, 2003, 38(10): 1691--1702. DOI: 10.1109/JSSC.2003.817256.
+  \bibitem{AlShyoukh2007} M. Al-Shyoukh, H. Lee, and R. Perez. A transient-enhanced low-quiescent current low-dropout regulator with buffer impedance attenuation[J]. \textit{IEEE Journal of Solid-State Circuits}, 2007, 42(8): 1732--1742. DOI: 10.1109/JSSC.2007.900281.
 \end{thebibliography}
+\end{spacing}
 
 % ==================
 % 附录（可选）
